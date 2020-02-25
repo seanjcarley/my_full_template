@@ -1,9 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-    
-    {% for number in list_of_numbers %}
-        <p>{{ number }}</p>
-    {% endfor %}
 
     <h2>{{ page_title }}</h2>
     <p>
@@ -20,40 +16,29 @@
         on other business, welcomed a fourteenth to fill into their party. 
     </p>
 
+    {% for member in company %}
     <div class="row featurette">
+        {% if loop.index % 2 != 0 %}
         <div class="col-md-7">
-            <h3>Thorin Okenshield</h3>
-            <p>
-                In the year TA 2746, Thorin II was born to Dwarven prince 
-                Thráin II in the mountain city of The Lonely Mountain. Early 
-                in his youth, he and the other Dwarves of the Lonely Mountain 
-                were forced to flee by the dragon Smaug in TA 2770. While in 
-                exile, he quickly grew to become a capable warrior. This was 
-                demonstrated when he participated in the Battle of Azanulbizar 
-                in TA 2799. He marched with one of the Dwarven armies beneath 
-                the East-gate of Moria. At some point in the fighting, his 
-                shield broke, and using an oaken tree branch found on the 
-                floor as a shield, he gained the epithet "Oakenshield," which 
-                would remain with him even in death.
-            </p>
+            <h3>{{ loop.index }}. {{ member.name }}</h3>
+            <p>{{ member.description }}</p>
         </div>
         <div class="col-md-5">
-            <img src="https://upload.wikimedia.org/wikipedia/en/e/ed/Thorin%2C_from_the_Hobbit.jpg" alt="Thorin Okenshield">
+            <img class="featurette-image img-responsive" src="{{ member.image_source }}">
         </div>
-    </div>
-    <div class="row featurette">
+        {% else %}
         <div class="col-md-5">
-            <img src="https://vignette.wikia.nocookie.net/lotr/images/b/b4/The-Hobbit-Fili-and-Kili.jpg/revision/latest?cb=20110714202952" alt="Fili and kili">
+            <img class="featurette-image img-responsive" src="{{ member.image_source }}">
         </div>
         <div class="col-md-7">
-            <h3>Fili and Kili</h3>
-            <p>
-                Fíli and Kíli were nephews of Thorin, who was the elder 
-                brother of their mother Dís. They were also nephews of Frerin, 
-                grandsons of Thráin II, and great-grandsons of Thror. Fíli's 
-                most distinguishing feature was his long nose, the longest of 
-                any of the Dwarves on the Quest of Erebor.
-            </p>
+            <h3>{{ loop.index }}. {{ member.name }}</h3>
+            <p>{{ member.description }}</p>
         </div>
+        {% endif %}
     </div>
+    {% if loop.index != 13 %}
+    <hr class="featruette-divider">
+    {% endif %}
+
+    {% endfor %}
 {% endblock %}
